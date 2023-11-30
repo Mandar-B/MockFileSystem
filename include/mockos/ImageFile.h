@@ -18,7 +18,6 @@ public:
     // Destructor
     ~ImageFile() override;
 
-    // Implementing AbstractFile interface
     unsigned int getSize() const override;
     std::string getName() const override;
     int write(const std::vector<char>& data) override;

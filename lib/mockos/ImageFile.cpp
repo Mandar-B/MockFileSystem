@@ -13,7 +13,7 @@ ImageFile::~ImageFile() {
 }
 
 unsigned int ImageFile::getSize() const {
-    return static_cast<unsigned int>(imageSize);
+    return static_cast<unsigned int>(imageSize*imageSize);
 }
 
 std::string ImageFile::getName() const {
@@ -27,7 +27,7 @@ int ImageFile::write(const std::vector<char>& data) {
     }
 
     char sizeChar = data.back();
-    int size = static_cast<int>(sizeChar) - static_cast<int>('0');
+    int size = sizeChar-'0';
 
     if (size <= 0 || size * size + 1 != data.size()) {
 
