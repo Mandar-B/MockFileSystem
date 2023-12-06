@@ -23,10 +23,10 @@ int TextFile::append(const std::vector<char>& data) {
     return 0;
 }
 
-void TextFile::read() const {
-    for (char c : contents) {
-        std::cout << c;
-    }
-    std::cout << std::endl;
+vector<char> TextFile::read() const {
+    return contents;
 }
 
+void TextFile::accept(AbstractFileVisitor& fv) {
+    fv.visit_TextFile(*this);
+}

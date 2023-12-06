@@ -67,13 +67,10 @@ int ImageFile::append(const std::vector<char>& data) {
     return 4;
 }
 
-void ImageFile::read() const {
+std::vector<char> ImageFile::read() const {
+    return content;
+}
 
-    for (int y = 0; y < static_cast<int>(imageSize); ++y) {
-        for (int x = 0; x < static_cast<int>(imageSize); ++x) {
-            char pixel = content[coordToIndex(x, y)];
-            std::cout << pixel << ' ';
-        }
-        std::cout << std::endl;
-    }
+void ImageFile::accept(AbstractFileVisitor& fv) {
+    fv.visit_ImageFile(*this);
 }

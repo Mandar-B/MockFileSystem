@@ -16,11 +16,12 @@ public:
     TextFile(string filename);
     virtual ~TextFile() = default;
 
-    virtual void read() const override;
+    virtual vector<char> read() const override;
     virtual int write(const vector<char>& data) override;
     virtual int append(const vector<char>& data) override;
     virtual unsigned int getSize() const override;
     virtual string getName() const override;
+    void accept(AbstractFileVisitor& fv);
 };
 
 #endif

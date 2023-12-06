@@ -22,8 +22,9 @@ public:
     std::string getName() const override;
     int write(const std::vector<char>& data) override;
     int append(const std::vector<char>& data) override;
-    void read() const override;
+    std::vector<char> read() const override;
     int coordToIndex(int x, int y) const;
+    void accept(AbstractFileVisitor& fv);
 };
 
 #endif // IMAGE_FILE_H
