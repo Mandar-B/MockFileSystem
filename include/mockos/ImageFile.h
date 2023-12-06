@@ -8,7 +8,7 @@
 class ImageFile : public AbstractFile {
 private:
     std::string fileName;
-    std::vector<char> content;
+    std::vector<char> contents;
     char imageSize;
 
 public:
@@ -17,6 +17,7 @@ public:
 
     // Destructor
     ~ImageFile() override;
+    void accept(AbstractFileVisitor* visitor) override;
 
     unsigned int getSize() const override;
     std::string getName() const override;
@@ -24,7 +25,6 @@ public:
     int append(const std::vector<char>& data) override;
     std::vector<char> read() const override;
     int coordToIndex(int x, int y) const;
-    void accept(AbstractFileVisitor& fv);
 };
 
 #endif // IMAGE_FILE_H

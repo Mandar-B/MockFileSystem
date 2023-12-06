@@ -21,7 +21,8 @@ public:
     virtual int append(const vector<char>& data) override;
     virtual unsigned int getSize() const override;
     virtual string getName() const override;
-    void accept(AbstractFileVisitor& fv);
+    void accept(AbstractFileVisitor* visitor) override;
 };
 
 #endif
+// Include guards and #pragma once should not be repeated in the same file

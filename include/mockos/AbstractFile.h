@@ -3,8 +3,7 @@
 
 #include <vector>
 #include <string>
-#include "AbstractFileVisitor.h"
-
+class AbstractFileVisitor;
 class AbstractFile {
 public:
     virtual ~AbstractFile() = default; // Virtual destructor for proper polymorphism
@@ -14,7 +13,7 @@ public:
     virtual int write(const std::vector<char>& data) = 0;
     virtual int append(const std::vector<char>& data) = 0;
     virtual std::vector<char> read() const = 0;
-    virtual void accept(AbstractFileVisitor& fv) = 0;
+    virtual void accept(AbstractFileVisitor* visitor) = 0;
 };
 
 #endif // ABSTRACT_FILE_H
