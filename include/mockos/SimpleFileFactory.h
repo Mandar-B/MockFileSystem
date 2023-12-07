@@ -3,7 +3,7 @@
 #pragma once
 
 #include "AbstractFileFactory.h"
-  // Include the header file for SimpleFile
+// Include the header file for SimpleFile
 
 
 
@@ -16,5 +16,5 @@ public:
     // Implementation of the createFile method
     AbstractFile* createFile(const std::string& fileName) override;
 };
- // SIMPLE_FILE_SYSTEM_H
+// SIMPLE_FILE_SYSTEM_H
 

@@ -1,5 +1,5 @@
 #include "../include/mockos/ImageFile.h"
-
+#include "../include/mockos/AbstractFileVisitor.h"
 #include <iostream>
 
 
@@ -21,7 +21,7 @@ std::string ImageFile::getName() const {
 }
 int ImageFile::write(const std::vector<char>& data) {
     if (data.empty()) {
-        content.clear();
+        contents.clear();
         imageSize = 0;
         return 1;
     }
@@ -31,7 +31,7 @@ int ImageFile::write(const std::vector<char>& data) {
 
     if (size <= 0 || size * size + 1 != data.size()) {
 
-        content.clear();
+        contents.clear();
         imageSize = 0;
         return 2;
     }
@@ -40,14 +40,14 @@ int ImageFile::write(const std::vector<char>& data) {
     for (int i = 0; i < size * size; ++i) {
         if (data[i] != 'X' && data[i] != ' ') {
 
-            content.clear();
+            contents.clear();
             imageSize = 0;
             return 3;
         }
     }
 
 
-    content.assign(data.begin(), data.end() - 1);
+    contents.assign(data.begin(), data.end() - 1);
 
 
     imageSize = static_cast<char>(size);
@@ -68,9 +68,8 @@ int ImageFile::append(const std::vector<char>& data) {
 }
 
 std::vector<char> ImageFile::read() const {
-    return content;
+    return contents;
 }
-
-void ImageFile::accept(AbstractFileVisitor& fv) {
-    fv.visit_ImageFile(*this);
+void ImageFile::accept(AbstractFileVisitor* visitor) {
+    visitor->visit_ImageFile(this);
 }
