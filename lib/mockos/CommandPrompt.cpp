@@ -56,7 +56,7 @@ int CommandPrompt::run() {
         std::string inp = prompt();
 
         if (inp == "q") {
-            return 0;
+            return 1;
         } else if (inp == "help") {
             listCommands();
         } else {

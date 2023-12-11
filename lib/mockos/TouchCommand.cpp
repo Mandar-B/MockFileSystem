@@ -7,9 +7,8 @@
 
 using namespace std;
 
-TouchCommand::TouchCommand(AbstractFileSystem*, AbstractFileFactory*) {
-
-}
+TouchCommand::TouchCommand(AbstractFileSystem* fs, AbstractFileFactory* ff)
+        : fileSystem(fs), fileFactory(ff) {}
 
 void TouchCommand::displayInfo() {
     cout << "touch creates a file, touch can be invoked with the command: touch <filename>" << endl;
