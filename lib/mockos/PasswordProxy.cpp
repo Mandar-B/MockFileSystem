@@ -57,3 +57,9 @@ void PasswordProxy::accept(AbstractFileVisitor* fv)  {
     if (pwd == password)
         return file_ptr->accept(fv);
 }
+
+AbstractFile* PasswordProxy::copy(string n) const {
+    AbstractFile* nf = file_ptr->copy(n);
+    PasswordProxy* cp = new PasswordProxy(nf, nf->getName());
+    return cp;
+}

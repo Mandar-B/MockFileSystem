@@ -22,6 +22,7 @@ public:
     virtual unsigned int getSize() const override;
     virtual string getName() const override;
     void accept(AbstractFileVisitor* visitor) override;
+    AbstractFile* copy(std::string) const override;
 };
 
 #endif
