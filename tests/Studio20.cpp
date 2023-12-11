@@ -424,7 +424,7 @@ TEST(basicDisplayVisitor,visitTextFile) { // tests output of basic display visit
     cout.rdbuf(backup);
     ASSERT_EQ(wordShouldBe, word);
     ASSERT_EQ(0, resWrite);
-    cout.rdbuf(backup_out);
+
 }
 
 TEST(basicDisplayVisitor,visitImageFile) { // tests the output the basic display visitor for an image file, expects 5 Xs

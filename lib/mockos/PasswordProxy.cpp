@@ -4,7 +4,7 @@
 #include "../include/mockos/PasswordProxy.h"
 #include "../include/mockos/AbstractFile.h"
 
-PasswordProxy::PasswordProxy(AbstractFile* fp, string pwd)
+PasswordProxy::PasswordProxy(AbstractFile* fp, std::string pwd)
 : file_ptr(fp), password(pwd) {}
 
 PasswordProxy::~PasswordProxy() {
@@ -50,8 +50,8 @@ std::vector<char> PasswordProxy::read() const {
         return std::vector<char>();
 }
 
-void PasswordProxy::accept(AbstractFileVisitor& fv)  {
+void PasswordProxy::accept(AbstractFileVisitor* visitor)  {
     std::string pwd = passwordPrompt();
     if (pwd == password)
-        return file_ptr->accept(fv);
+        return file_ptr->accept(visitor);
 }
