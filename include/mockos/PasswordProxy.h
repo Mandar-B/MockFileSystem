@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "AbstractFile.h"
 
 class PasswordProxy : public AbstractFile {
 private:

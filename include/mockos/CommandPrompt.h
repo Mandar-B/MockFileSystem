@@ -1,5 +1,7 @@
 #pragma once
-
+#include "AbstractCommand.h"
+#include "AbstractFileSystem.h"
+#include "AbstractFileFactory.h"
 #include <map>
 
 class CommandPrompt {
@@ -12,8 +14,9 @@ private:
     AbstractFileFactory* file_factory;
 public:
     CommandPrompt();
-    void setFileSystem(AbstractFileSystem*);
-    void setFileFactory(AbstractFileFactory*);
-    int addCommand(std::string, AbstractCommand*);
+    ~CommandPrompt();
+    void setFileSystem(AbstractFileSystem* fs);
+    void setFileFactory(AbstractFileFactory* ff);
+    int addCommand(std::string, AbstractCommand* command);
     int run();
 };

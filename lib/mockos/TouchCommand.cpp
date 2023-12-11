@@ -11,9 +11,7 @@
 using namespace std;
 
 TouchCommand::TouchCommand(AbstractFileSystem* fs, AbstractFileFactory* ff)
-  : file_system(fs), file_factory(ff) {
-    
-}
+        : fileSystem(fs), fileFactory(ff) {}
 
 void TouchCommand::displayInfo() {
     cout << "touch creates a file, touch can be invoked with the command: touch <filename>" << endl;
@@ -31,7 +29,7 @@ int TouchCommand::execute(string args) {
 
     string flag;
 
-    AbstractFile* f = file_factory->createFile(fname);
+    AbstractFile* f = fileFactory->createFile(fname);
 
     if (ss >> flag) {
         if (flag == "-p") {
@@ -45,5 +43,5 @@ int TouchCommand::execute(string args) {
     if (f == nullptr)
         return NFILE;
 
-    return file_system->addFile(f->getName(), f);
+    return fileSystem->addFile(f->getName(), f);
 }

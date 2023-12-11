@@ -16,6 +16,12 @@ CommandPrompt::CommandPrompt() {
     file_system = nullptr;
     file_factory = nullptr;
 }
+CommandPrompt::~CommandPrompt() {
+    // Clean up the command objects in the map
+    for (const auto& pair : cobjs) {
+        delete pair.second;
+    }
+}
 
 void CommandPrompt::setFileSystem(AbstractFileSystem* fs) {
     file_system = fs;
@@ -31,7 +37,10 @@ int CommandPrompt::addCommand(string n, AbstractCommand* cmd) {
 }
 
 void CommandPrompt::listCommands() {
-    copy(begin(cobjs), end(cobjs), ostream_iterator<string>(cout, "\n"));
+    std::cout << "Available commands:" << std::endl;
+    for (const auto& pair : cobjs) {
+        std::cout << pair.first << std::endl;
+    }
 }
 
 string CommandPrompt::prompt() {
@@ -44,41 +53,43 @@ string CommandPrompt::prompt() {
 
 int CommandPrompt::run() {
     do {
-        string inp = prompt();
+        std::string inp = prompt();
 
-        if (inp == "q")
-            return 0;
-        else if (inp == "help")
+        if (inp == "q") {
+            return 1;
+        } else if (inp == "help") {
             listCommands();
-        else {
-            if (inp.find(' ') != string::npos) {
-                istringstream ss(inp);
-                string w1;
+        } else {
+            if (inp.find(' ') != std::string::npos) {
+                std::istringstream ss(inp);
+                std::string w1;
                 ss >> w1;
 
                 if (w1 == "help") {
-                    string w2;
+                    std::string w2;
                     ss >> w2;
                     if (cobjs.find(w2) != cobjs.end())
-                        cobjs[w2]->displayInfo();   
+                        cobjs[w2]->displayInfo();
                     else
-                        cout << "That command doesn't seem to exist! Use `help` to get a list of commands"; 
+                        std::cout << "That command doesn't seem to exist! Use `help` to get a list of commands" << std::endl;
                 } else {
                     if (cobjs.find(w1) != cobjs.end()) {
                         int ret = cobjs[w1]->execute(ss.str());
-                        if (ret != 0) cout << "There was an error running " << w1 << "! Use `help " << w1 << "` to get more info about how to use the command" << endl;
-                    } else
-                        cout << "That command doesn't seem to exist! Use `help` to get a list of commands";
+                        if (ret != 0)
+                            std::cout << "There was an error running " << w1 << "! Use `help " << w1 << "` to get more info about how to use the command" << std::endl;
+                    } else {
+                        std::cout << "That command doesn't seem to exist! Use `help` to get a list of commands" << std::endl;
+                    }
                 }
             } else {
-                if (cobjs.find(inp) != cobjs.end())
-                    int ret = cobjs[inp]->execute("");   
-                    if (ret != 0) cout << "There was an error running " << inp << "! Use `help " << inp << "` to get more info about how to use the command" << endl;
-                else
-                    cout << "That command doesn't seem to exist! Use `help` to get a list of commands";                 
+                if (cobjs.find(inp) != cobjs.end()) {
+                    int ret = cobjs[inp]->execute("");
+                    if (ret != 0)
+                        std::cout << "There was an error running " << inp << "! Use `help " << inp << "` to get more info about how to use the command" << std::endl;
+                } else {
+                    std::cout << "That command doesn't seem to exist! Use `help` to get a list of commands" << std::endl;
+                }
             }
         }
-    } while (1);
+    } while (true);
 }
-
-void 
