@@ -23,7 +23,7 @@ int MacroCommand::execute(std::string flags) {
     vector<string> params = strategy->parse(flags);
     for (int i = 0; i < params.size(); ++i) {
         int res = commands[i]->execute(params[i]);
-        if (res != 0)
+        if (res != OK)
             return res;
     }
     return OK;

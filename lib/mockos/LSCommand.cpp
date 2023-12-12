@@ -27,7 +27,9 @@ int LSCommand::execute(std::string flags) {
         if (flags == "-m") {
             MetadataDisplayVisitor mdv();
             AbstractFile* cfile = file_system->openFile(*itr);
-            cout << *itr << endl; // TODO: properly utilize metadata visitor 
+            AbstractFileVisitor* fv = new MetadataDisplayVisitor();
+            cout << *itr << endl;
+            cfile->accept(fv);
         } else {
             cout << (i % 2 ? left : right) << setw(FNAME_WIDTH) << *itr << (i % 2 ? "" : "\n");
         }

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <sstream>
 
 #include "../include/mockos/CopyCommand.h"
 #include "../include/mockos/Constants.h"
@@ -20,5 +21,18 @@ void CopyCommand::displayInfo() {
 }
 
 int CopyCommand::execute(std::string flags) {
+    istringstream ss(flags);
+
+    string src;
+    string dest;
+
+    if (!(ss >> src)) return NARGS;
+    if (!(ss >> dest)) return NARGS;
+
+    AbstractFile* srcf = file_system->openFile(src);
+    AbstractFile* destf = srcf->copy(dest);
+
+    file_system->addFile(destf->getName(), destf);
+
     return OK;
 }

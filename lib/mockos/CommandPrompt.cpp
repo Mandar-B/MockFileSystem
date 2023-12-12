@@ -9,6 +9,7 @@
 #include "../include/mockos/AbstractFileSystem.h"
 #include "../include/mockos/AbstractFileFactory.h"
 #include "../include/mockos/AbstractCommand.h"
+#include "../include/mockos/Constants.h"
 
 using namespace std;
 
@@ -33,7 +34,7 @@ void CommandPrompt::setFileFactory(AbstractFileFactory* ff) {
 
 int CommandPrompt::addCommand(string n, AbstractCommand* cmd) {
     pair<map<string, AbstractCommand*>::iterator, bool> ret = cobjs.insert({n, cmd});
-    return ret.second ? 0 : 4;
+    return ret.second ? OK : NOCMD;
 }
 
 void CommandPrompt::listCommands() {
@@ -56,7 +57,7 @@ int CommandPrompt::run() {
         std::string inp = prompt();
 
         if (inp == "q") {
-            return 1;
+            return QUIT;
         } else if (inp == "help") {
             listCommands();
         } else {
@@ -75,7 +76,7 @@ int CommandPrompt::run() {
                 } else {
                     if (cobjs.find(w1) != cobjs.end()) {
                         int ret = cobjs[w1]->execute(ss.str());
-                        if (ret != 0)
+                        if (ret != OK)
                             std::cout << "There was an error running " << w1 << "! Use `help " << w1 << "` to get more info about how to use the command" << std::endl;
                     } else {
                         std::cout << "That command doesn't seem to exist! Use `help` to get a list of commands" << std::endl;
@@ -84,7 +85,7 @@ int CommandPrompt::run() {
             } else {
                 if (cobjs.find(inp) != cobjs.end()) {
                     int ret = cobjs[inp]->execute("");
-                    if (ret != 0)
+                    if (ret != OK)
                         std::cout << "There was an error running " << inp << "! Use `help " << inp << "` to get more info about how to use the command" << std::endl;
                 } else {
                     std::cout << "That command doesn't seem to exist! Use `help` to get a list of commands" << std::endl;

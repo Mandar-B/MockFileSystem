@@ -3,6 +3,7 @@
 
 #include "../include/mockos/PasswordProxy.h"
 #include "../include/mockos/AbstractFile.h"
+#include "../include/mockos/Constants.h"
 
 using namespace std;
 
@@ -33,7 +34,7 @@ int PasswordProxy::write(const vector<char>& data)  {
     if (pwd == password)
         return file_ptr->write(data);
     else
-        return 1;
+        return PXWRT;
 }
 
 int PasswordProxy::append(const vector<char>& data)  {
@@ -41,7 +42,7 @@ int PasswordProxy::append(const vector<char>& data)  {
     if (pwd == password)
         return file_ptr->append(data);
     else
-        return 2;
+        return PXAPP;
 }
 
 vector<char> PasswordProxy::read() const {
@@ -55,7 +56,7 @@ vector<char> PasswordProxy::read() const {
 void PasswordProxy::accept(AbstractFileVisitor* fv)  {
     string pwd = passwordPrompt();
     if (pwd == password)
-        return file_ptr->accept(fv);
+        file_ptr->accept(fv);
 }
 
 AbstractFile* PasswordProxy::copy(string n) const {
