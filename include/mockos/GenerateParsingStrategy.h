@@ -2,7 +2,7 @@
 
 #include "AbstractParsingStrategy.h"
 
-class RenameParsingStrategy : public AbstractParsingStrategy {
+class GenerateParsingStrategy : public AbstractParsingStrategy {
 public:
     std::vector<std::string> parse(std::string) const override;
 };
