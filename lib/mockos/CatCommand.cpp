@@ -57,7 +57,7 @@ int CatCommand::execute(std::string args) {
         file_data.push_back('\n');
         getline(std::cin, input);
     }
-
+    int ret=0;
     if (input == ":wq") {
         // Remove the last '\n' character if present
         if (!file_data.empty() && file_data.back() == '\n') {
@@ -67,12 +67,13 @@ int CatCommand::execute(std::string args) {
         if (flag == "-a") {
             std::vector<char> prev = f->read();
             std::copy(file_data.begin(), file_data.end(), std::back_inserter(prev));
-            return f->write(prev);
+            ret=f->write(prev);
+
         } else {
-            return f->write(file_data);
+            ret= f->write(file_data);
         }
 
     }
-
-    return 0;
+file_system->closeFile(f);
+    return ret;
 }

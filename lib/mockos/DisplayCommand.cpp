@@ -8,6 +8,7 @@
 #include "../include/mockos/AbstractFileSystem.h"
 #include "../include/mockos/AbstractFileFactory.h"
 #include "../include/mockos/MetadataDisplayVisitor.h"
+#include "../include/mockos/BasicDisplayVisitor.h"
 
 using namespace std;
 
@@ -28,8 +29,9 @@ int DisplayCommand::execute(std::string args) {
 
     std::string fname;
 
-    if (!(ss >> fname)) return 1;
 
+    if (!(ss >> fname)) return 1;
+    cout<<fname;
     AbstractFile* f = file_system->openFile(fname);
 
     if (f == nullptr) {
@@ -48,6 +50,9 @@ int DisplayCommand::execute(std::string args) {
     } else {
         // Display formatted contents
         std::cout << "Displaying formatted contents of file: " << fname << std::endl;
+        AbstractFileVisitor* fv = new BasicDisplayVisitor();
+
+        f->accept(fv);
         // You may want to implement a visitor pattern or other methods to display formatted contents
     }
 

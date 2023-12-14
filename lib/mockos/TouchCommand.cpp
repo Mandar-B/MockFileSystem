@@ -25,7 +25,8 @@ int TouchCommand::execute(string args) {
 
     string fname;
 
-    if (!(ss >> fname)) return SFAIL;
+    if (!(ss >> fname))return SFAIL;
+
 
     string flag;
 

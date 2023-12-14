@@ -34,7 +34,7 @@ void CommandPrompt::setFileFactory(AbstractFileFactory* ff) {
 
 int CommandPrompt::addCommand(string n, AbstractCommand* cmd) {
     pair<map<string, AbstractCommand*>::iterator, bool> ret = cobjs.insert({n, cmd});
-    return ret.second ? OK : NOCMD;
+    return ret.second ? OK : 2;
 }
 
 void CommandPrompt::listCommands() {
@@ -57,7 +57,7 @@ int CommandPrompt::run() {
         std::string inp = prompt();
 
         if (inp == "q") {
-            return QUIT;
+            return 1;
         } else if (inp == "help") {
             listCommands();
         } else {
@@ -75,9 +75,12 @@ int CommandPrompt::run() {
                         std::cout << "That command doesn't seem to exist! Use `help` to get a list of commands" << std::endl;
                 } else {
                     if (cobjs.find(w1) != cobjs.end()) {
-                        int ret = cobjs[w1]->execute(ss.str());
+                        string remainder;
+                        getline(ss,remainder);
+                        int ret = cobjs[w1]->execute(remainder);
+
                         if (ret != OK)
-                            std::cout << "There was an error running " << w1 << "! Use `help " << w1 << "` to get more info about how to use the command" << std::endl;
+                            std::cout << "There was an error running " << w1 << "! Use `help " << w1 << "` to get more info about how to use the command" << ret<<std::endl;
                     } else {
                         std::cout << "That command doesn't seem to exist! Use `help` to get a list of commands" << std::endl;
                     }
