@@ -1,6 +1,9 @@
 #include "../include/mockos/ImageFile.h"
 #include "../include/mockos/AbstractFileVisitor.h"
 #include <iostream>
+#include <string>
+
+using namespace std;
 
 
 ImageFile::ImageFile(const std::string& name) : fileName(name), imageSize(0) {
@@ -72,4 +75,10 @@ std::vector<char> ImageFile::read() const {
 }
 void ImageFile::accept(AbstractFileVisitor* visitor) {
     visitor->visit_ImageFile(this);
+}
+
+AbstractFile* ImageFile::copy(string name) const {
+    ImageFile* cp = new ImageFile(name+fileName.substr(fileName.find(".")));
+    cp->write(read());
+    return cp;
 }

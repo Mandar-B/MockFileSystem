@@ -2,6 +2,11 @@
 #include "mockos/TextFile.h"
 #include "mockos/ImageFile.h"
 
+#include <string>
+#include <set>
+
+using namespace std;
+
 SimpleFileSystem::SimpleFileSystem(){
 
 }
@@ -11,7 +16,7 @@ SimpleFileSystem::~SimpleFileSystem(){
 
 
 
-int SimpleFileSystem::addFile(const std::string& filename, AbstractFile* file) {
+int SimpleFileSystem::addFile(const string& filename, AbstractFile* file) {
     // check if the file already exists
     if (filesMap.find(filename) != filesMap.end()) {
         return 1;
@@ -27,7 +32,7 @@ int SimpleFileSystem::addFile(const std::string& filename, AbstractFile* file) {
     return 0;
 }
 
-int SimpleFileSystem::createFile(const std::string& filename) {
+int SimpleFileSystem::createFile(const string& filename) {
 
     if (filesMap.find(filename) != filesMap.end()) {
         return 1;
@@ -35,11 +40,11 @@ int SimpleFileSystem::createFile(const std::string& filename) {
 
 
     size_t dotPosition = filename.find_last_of('.');
-    if (dotPosition == std::string::npos || dotPosition == 0 || dotPosition == filename.length() - 1) {
+    if (dotPosition == string::npos || dotPosition == 0 || dotPosition == filename.length() - 1) {
         return 2;
     }
 
-    std::string extension = filename.substr(dotPosition + 1);
+    string extension = filename.substr(dotPosition + 1);
 
     // Create the appropriate file type based on the extension
     AbstractFile* newFile = nullptr;
@@ -57,7 +62,7 @@ int SimpleFileSystem::createFile(const std::string& filename) {
     return 0; // Return 0 for a successful create
 }
 
-int SimpleFileSystem::deleteFile(const std::string& filename) {
+int SimpleFileSystem::deleteFile(const string& filename) {
     // Check if the file exists
     auto it = filesMap.find(filename);
     if (it == filesMap.end()) {
@@ -77,7 +82,7 @@ int SimpleFileSystem::deleteFile(const std::string& filename) {
     return 0; // Return 0 for a successful delete
 }
 
-AbstractFile* SimpleFileSystem::openFile(const std::string& filename) {
+AbstractFile* SimpleFileSystem::openFile(const string& filename) {
     // Check if the file exists
     auto it = filesMap.find(filename);
     if (it == filesMap.end()) {
@@ -107,4 +112,13 @@ int SimpleFileSystem::closeFile(AbstractFile* file) {
     openFiles.erase(it);
 
     return 0; // Return 0 for a successful close
+}
+
+std::set<std::string> SimpleFileSystem::getFileNames() {
+    std::set<std::string> out;
+    std::map<std::string, AbstractFile*>::iterator it;
+    for (it = filesMap.begin(); it != filesMap.end(); ++it) {
+        out.insert(it->first);
+    }
+    return out;  // Add this return statement
 }

@@ -21,6 +21,7 @@ public:
     int deleteFile(const std::string& filename) override;
     AbstractFile* openFile(const std::string& filename) override;
     int closeFile(AbstractFile* file) override;
+    std::set<std::string> getFileNames() override;
 };
 
 #endif // SIMPLE_FILE_SYSTEM_H

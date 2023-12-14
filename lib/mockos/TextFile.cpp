@@ -1,6 +1,9 @@
 #include "../include/mockos/TextFile.h"
 #include "../include/mockos/AbstractFileVisitor.h"
 #include <iostream>
+#include <string>
+
+using namespace std;
 
 TextFile::TextFile(string filename):name(filename){
 
@@ -29,4 +32,10 @@ vector<char> TextFile::read() const {
 }
 void TextFile::accept(AbstractFileVisitor* visitor) {
     visitor->visit_TextFile(this);
+}
+
+AbstractFile* TextFile::copy(string n) const {
+    TextFile* cp = new TextFile(n+name.substr(name.find(".")));
+    cp->write(read());
+    return cp;
 }

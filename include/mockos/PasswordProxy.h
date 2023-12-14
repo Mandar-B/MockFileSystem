@@ -15,7 +15,8 @@ public:
     int write(const std::vector<char>& data) override;
     int append(const std::vector<char>& data) override;
     std::vector<char> read() const override;
-    void accept(AbstractFileVisitor* visitor) override;
+    void accept(AbstractFileVisitor* fv) override;
+    AbstractFile* copy(std::string) const override;
 protected:
     std::string passwordPrompt() const;
 };

@@ -24,7 +24,9 @@ public:
     int write(const std::vector<char>& data) override;
     int append(const std::vector<char>& data) override;
     std::vector<char> read() const override;
+    AbstractFile* copy(std::string) const override;
     int coordToIndex(int x, int y) const;
+
 };
 
 #endif // IMAGE_FILE_H

@@ -3,6 +3,7 @@
 
 #include "AbstractFile.h"
 #include <string>
+#include <set>
 
 class AbstractFileSystem {
 public:
@@ -13,8 +14,7 @@ public:
     virtual int deleteFile(const std::string& filename) = 0;
     virtual AbstractFile* openFile(const std::string& filename) = 0;
     virtual int closeFile(AbstractFile* file) = 0;
+    virtual std::set<std::string> getFileNames() = 0;
 };
 
 #endif // ABSTRACT_FILE_SYSTEM_H
-
-
