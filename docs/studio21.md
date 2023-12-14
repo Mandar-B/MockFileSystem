@@ -1,5 +1,5 @@
 # Studio 21
-1. Nate Hayman
-2. TODO: explain virtual destructor in the base class
-3. Since the command prompt only requires the most abstract interface of the file system and file factory, it can be infinitely extended to support an entirely new file system without hardly any changes -- none if the new file system creates the same common interface as our current one
+1. Nate Hayman, Mandar Brahmbhatt
+2. If the base class did not have a destructor explicitly marked virtual, the compiler would call the default destructor of AbstractCommand whenever a command object is destroyed, which would fail to call the proper destructor of the derived class and potentially result in a memory leak
+3. Since the command prompt only requires the most abstract interface of the file system and file factory (AbstractFileSystem and AbstractFileFactory), it implicitly supports any file system or file factory which inherits from those common interfaces and the simple pair used currently can be swapped without any changes to the CommandPrompt class
 4. TODO: test studio 21
