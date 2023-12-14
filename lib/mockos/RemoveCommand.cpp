@@ -19,12 +19,11 @@ void RemoveCommand::displayInfo() {
 }
 
 int RemoveCommand::execute(std::string flags) {
-    if (flags == "")
-        return NARGS;
+    if (flags == "") return NARGS;
 
     istringstream ss(flags);
     string fname;
-    ss >> fname;
+    if (!(ss >> fname)) return NARGS;
 
     return file_system->deleteFile(fname);
 }

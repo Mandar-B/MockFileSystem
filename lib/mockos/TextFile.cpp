@@ -1,5 +1,6 @@
 #include "../include/mockos/TextFile.h"
 #include "../include/mockos/AbstractFileVisitor.h"
+#include "../include/mockos/Constants.h"
 #include <iostream>
 #include <string>
 
@@ -19,12 +20,12 @@ std::string TextFile::getName() const {
 
 int TextFile::write(const std::vector<char>& data) {
     contents = data;
-    return 0;
+    return OK;
 }
 
 int TextFile::append(const std::vector<char>& data) {
     contents.insert(contents.end(), data.begin(), data.end());
-    return 0;
+    return OK;
 }
 
 vector<char> TextFile::read() const {

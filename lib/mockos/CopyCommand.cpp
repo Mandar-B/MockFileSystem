@@ -21,21 +21,19 @@ void CopyCommand::displayInfo() {
 }
 
 int CopyCommand::execute(std::string args) {
-    if (args == "")
-        return 1;
+    if (args == "") return NARGS;
 
     std::istringstream ss(args);
 
     std::string originalName, newName;
 
-    if (!(ss >> originalName >> newName))
-        return 1;
+    if (!(ss >> originalName >> newName)) return NARGS;
 
     AbstractFile* originalFile = file_system->openFile(originalName);
 
     if (originalFile == nullptr) {
         std::cout << "File to copy does not exist" << std::endl;
-        return 1;
+        return UFILE;
     }
 
     AbstractFile* copy = copyFile(originalName, newName);
@@ -43,12 +41,12 @@ int CopyCommand::execute(std::string args) {
     if (copy == nullptr) {
         std::cout << "Copy failed" << std::endl;
         file_system->closeFile(originalFile);
-        return 1;
+        return COPFL;
     }
 
     file_system->closeFile(originalFile);
 
-    return 0;
+    return OK;
 }
 
 AbstractFile* CopyCommand::copyFile(const std::string& originalName, const std::string& newName) {
@@ -66,7 +64,7 @@ AbstractFile* CopyCommand::copyFile(const std::string& originalName, const std::
 
     int result = file_system->addFile(newName, copy);
 
-    if (result != 0) {
+    if (result != OK) {
         delete copy; // Delete the copy if adding to the file system fails
         return nullptr;
     }

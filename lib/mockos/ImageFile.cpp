@@ -1,5 +1,6 @@
 #include "../include/mockos/ImageFile.h"
 #include "../include/mockos/AbstractFileVisitor.h"
+#include "../include/mockos/Constants.h"
 #include <iostream>
 #include <string>
 
@@ -26,7 +27,7 @@ int ImageFile::write(const std::vector<char>& data) {
     if (data.empty()) {
         contents.clear();
         imageSize = 0;
-        return 1;
+        return NDATA;
     }
 
     char sizeChar = data.back();
@@ -36,7 +37,7 @@ int ImageFile::write(const std::vector<char>& data) {
 
         contents.clear();
         imageSize = 0;
-        return 2;
+        return NARGS;
     }
 
     // Check for valid pixels
@@ -45,7 +46,7 @@ int ImageFile::write(const std::vector<char>& data) {
 
             contents.clear();
             imageSize = 0;
-            return 3;
+            return UPIXL;
         }
     }
 
@@ -55,7 +56,7 @@ int ImageFile::write(const std::vector<char>& data) {
 
     imageSize = static_cast<char>(size);
 
-    return 0;
+    return OK;
 }
 
 

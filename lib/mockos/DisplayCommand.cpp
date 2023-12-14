@@ -2,6 +2,8 @@
 #include <iomanip>
 #include <string>
 #include <sstream>
+#include <ostream>
+#include <iterator>
 
 #include "../include/mockos/DisplayCommand.h"
 #include "../include/mockos/Constants.h"
@@ -18,45 +20,43 @@ DisplayCommand::DisplayCommand(AbstractFileSystem* fs)
 }
 
 void DisplayCommand::displayInfo() {
-    std::cout << "ds <filename> [-d]" << std::endl;
+    cout << "ds <filename> [-d]" << endl;
 }
 
-int DisplayCommand::execute(std::string args) {
-    if (args == "")
-        return 1;
+int DisplayCommand::execute(string args) {
+    if (args == "") return NARGS;
 
-    std::istringstream ss(args);
+    istringstream ss(args);
 
-    std::string fname;
+    string fname;
 
 
-    if (!(ss >> fname)) return 1;
-    cout<<fname;
+    if (!(ss >> fname)) return NARGS;
+
     AbstractFile* f = file_system->openFile(fname);
 
     if (f == nullptr) {
-        std::cout << "Failed to open file" << std::endl;
-        return 1;
+        cout << "Failed to open file" << endl;
+        return UFILE;
     }
 
-    std::string flag;
+    string flag;
     ss >> flag;
 
     if (flag == "-d") {
         // Display unformatted data only
-        std::vector<char> contents = f->read();
-        std::copy(contents.begin(), contents.end(), std::ostream_iterator<char>(std::cout, ""));
-        std::cout << std::endl;
+        vector<char> contents = f->read();
+        copy(contents.begin(), contents.end(), ostream_iterator<char>(cout, ""));
+        cout << endl;
     } else {
         // Display formatted contents
-        std::cout << "Displaying formatted contents of file: " << fname << std::endl;
+        cout << "Displaying formatted contents of file: " << fname << endl;
         AbstractFileVisitor* fv = new BasicDisplayVisitor();
-
         f->accept(fv);
         // You may want to implement a visitor pattern or other methods to display formatted contents
     }
 
     file_system->closeFile(f);
 
-    return 0;
+    return OK;
 }
