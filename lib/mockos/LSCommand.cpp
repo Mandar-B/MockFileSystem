@@ -24,18 +24,22 @@ void LSCommand::displayInfo() {
 int LSCommand::execute(std::string flags) {
     set<string> files = file_system->getFileNames();
 
+
     if (flags == "-m") {
-        MetadataDisplayVisitor mdv;
-        for (const auto& fileName : files) {
+        MetadataDisplayVisitor* mdv = new MetadataDisplayVisitor;
+        for (std::string fileName : files) {
             AbstractFile* file = file_system->openFile(fileName);
-            if (file) {
-                file->accept(&mdv);
+            cout<<fileName;
+            if (file==nullptr) {
+                return UFILE;
+
             }
+            file->accept(mdv);
             file_system->closeFile(file);
         }
     } else {
         int i = 0;
-        for (const auto& fileName : files) {
+        for (std::string fileName : files) {
             if (i % 2 == 0) {
                 cout << left << setw(FNAME_WIDTH) << fileName;
             } else {

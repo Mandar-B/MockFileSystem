@@ -78,8 +78,9 @@ void ImageFile::accept(AbstractFileVisitor* visitor) {
     visitor->visit_ImageFile(this);
 }
 
-AbstractFile* ImageFile::copy(string name) const {
-    ImageFile* cp = new ImageFile(name+fileName.substr(fileName.find(".")));
+AbstractFile* ImageFile::copy(string n) const {
+    ImageFile* cp = new ImageFile(n+".img");
+
     cp->write(read());
     return cp;
 }

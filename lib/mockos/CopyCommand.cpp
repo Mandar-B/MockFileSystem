@@ -36,20 +36,21 @@ int CopyCommand::execute(std::string args) {
         return UFILE;
     }
 
-    AbstractFile* copy = copyFile(originalName, newName);
+    AbstractFile* copy = originalFile->copy(newName);
 
     if (copy == nullptr) {
         std::cout << "Copy failed" << std::endl;
         file_system->closeFile(originalFile);
         return COPFL;
     }
-
     file_system->closeFile(originalFile);
+    int result = file_system->addFile(copy->getName(), copy);
 
-    return OK;
+
+    return result;
 }
 
-AbstractFile* CopyCommand::copyFile(const std::string& originalName, const std::string& newName) {
+/*AbstractFile* CopyCommand::copyFile(const std::string& originalName, const std::string& newName) {
     AbstractFile* originalFile = file_system->openFile(originalName);
 
     if (originalFile == nullptr)
@@ -71,3 +72,4 @@ AbstractFile* CopyCommand::copyFile(const std::string& originalName, const std::
 
     return copy;
 }
+ */
