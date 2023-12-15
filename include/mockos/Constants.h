@@ -22,7 +22,7 @@ enum codes {
     DEP  ,  // deprecated
     NWRIT,  // write permission failure
     NEXEC,  // execute permission failure
-
+    PRMCS,  // permission file cast failure
 };
 
 const int FNAME_WIDTH = 20;
