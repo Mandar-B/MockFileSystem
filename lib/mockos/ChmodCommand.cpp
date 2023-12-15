@@ -51,19 +51,20 @@ int ChmodCommand::execute(string args) {
         if (pf == nullptr)
             return PRMCS;
 
-        pf->setRead(false);
-        pf->setWrite(false);
-        pf->setExecute(false);
-        for (char p : perms) {
-            if (p == 'r') {
-                pf->setRead(true);
-            } else if (p == 'w') {
-                pf->setWrite(true);
-            } else if (p == 'x') {
-                pf->setExecute(true);
-            }
+
+        if (perms[0] != '+' && perms[0] != '-')
+            return NARGS;
+        
+        bool should_add = perms[0] == '+';
+
+        for (int i = 0; i < perms.length(); ++i) {
+            if (perms[i] == 'r')
+                pf->setRead(should_add);
+            else if (perms[i] == 'w')
+                pf->setWrite(should_add);
+            else if (perms[i] == 'x')
+                pf->setExecute(should_add);
         }
-        file_system->closeFile(pf);
     }
 
     return OK;
