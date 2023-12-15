@@ -13,6 +13,6 @@ vector<string> RenameParsingStrategy::parse(string input) const {
     string dest;
     if (!(ss >> original)) return vector<string>();
     if (!(ss >> dest)) return vector<string>();
-    vector<string> out = {original, dest};
+    vector<string> out = {original, dest, original};
     return out;
 };
