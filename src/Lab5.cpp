@@ -33,12 +33,16 @@ int main() {
     rn->setParseStrategy(rnps);
     rn->addCommand(cp);
     rn->addCommand(rm);
+    delete rnps; // collect resources
 
+    // Create file, edit it, and display it
     MacroCommand* gen = new MacroCommand(fs);
     GenerateParsingStrategy* genps = new GenerateParsingStrategy();
     gen->setParseStrategy(genps);
-    gen->addCommand(cp);
-    gen->addCommand(rm);
+    gen->addCommand(touch);
+    gen->addCommand(cat);
+    gen->addCommand(ds);
+    delete genps; // collect resources
 
     cmd.addCommand("cp", cp);
     cmd.addCommand("ds", ds);
@@ -49,5 +53,12 @@ int main() {
     cmd.addCommand("rn", rn);
     cmd.addCommand("gen", gen);
 
-    return cmd.run();
+    int ret = cmd.run();
+
+    // We need to properly delete resources
+    delete fs;
+    delete ff;
+    // Commands will be deleted when CommandPrompt is automatically destroyed
+
+    return ret;
 }
