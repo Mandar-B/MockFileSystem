@@ -32,7 +32,7 @@ int MacroCommand::execute(std::string flags) {
 void MacroCommand::addCommand(AbstractCommand* cmd) {
     commands.push_back(cmd);
 }
-void MacroCommand::setParseStrategy(AbstractParsingStrategy* strategy) {
+void MacroCommand::setParseStrategy(AbstractParsingStrategy* stgy) {
     // Implementation here
-
+    strategy = strategy;
 }
