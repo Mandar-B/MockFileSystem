@@ -8,11 +8,11 @@
 using namespace std;
 
 vector<string> RenameParsingStrategy::parse(string input) const {
-    vector<string> out;
-    out.push_back(input);
     istringstream ss(input);
-    string rmf;
-    ss >> rmf;
-    out.push_back(rmf);
+    string original;
+    string dest;
+    ss >> original;
+    ss >> dest;
+    vector<string> out = {original, dest};
     return out;
 };
