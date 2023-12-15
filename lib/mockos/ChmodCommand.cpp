@@ -48,12 +48,16 @@ int ChmodCommand::execute(string args) {
     if (perms != "") {
         PermissionFile* pf = dynamic_cast<PermissionFile*>(f);
 
-        if (pf == nullptr)
+        if (pf == nullptr) {
+            file_system->closeFile(f);
             return PRMCS;
+        }
 
 
-        if (perms[0] != '+' && perms[0] != '-')
+        if (perms[0] != '+' && perms[0] != '-') {
+            file_system->closeFile(f);
             return NARGS;
+        }
         
         bool should_add = perms[0] == '+';
 
@@ -65,6 +69,8 @@ int ChmodCommand::execute(string args) {
             else if (perms[i] == 'x')
                 pf->setExecute(should_add);
         }
+
+        file_system->closeFile(pf);
     }
 
     return OK;

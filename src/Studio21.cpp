@@ -16,7 +16,8 @@ int main() {
 
     cmd_prompt.run();
 
-    fs->openFile("example.txt");
+    AbstractFile* f = fs->openFile("example.txt");
+    fs->closeFile(f);
 
     return 0;
 }

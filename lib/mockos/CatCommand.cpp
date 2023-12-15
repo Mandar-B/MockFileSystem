@@ -41,6 +41,7 @@ int CatCommand::execute(string args) {
 
         size_t dotPosition = name.find_last_of('.');
         if (dotPosition == string::npos || dotPosition == 0 || dotPosition == name.length() - 1) {
+            file_system->closeFile(f);
             return UFLFM;
         }
 
@@ -49,6 +50,7 @@ int CatCommand::execute(string args) {
         // Create the appropriate file type based on the extension
 
         if (extension == "img"){
+            file_system->closeFile(f);
             return NAPIM;
         }
         const vector<char> contents = f->read();
