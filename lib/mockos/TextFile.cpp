@@ -36,7 +36,11 @@ void TextFile::accept(AbstractFileVisitor* visitor) {
 }
 
 AbstractFile* TextFile::copy(string n) const {
-    TextFile* cp = new TextFile(n+name.substr(name.find(".")));
+    string newname = n+".txt";
+
+
+    TextFile* cp = new TextFile(newname);
+
     cp->write(read());
     return cp;
 }
