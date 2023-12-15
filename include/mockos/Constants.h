@@ -23,6 +23,7 @@ enum codes {
     NWRIT,  // write permission failure
     NEXEC,  // execute permission failure
     PRMCS,  // permission file cast failure
+    NAPIM,  // cannot append to an image file
 };
 
 const int FNAME_WIDTH = 20;

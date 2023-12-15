@@ -49,27 +49,3 @@ int CopyCommand::execute(std::string args) {
 
     return result;
 }
-
-/*AbstractFile* CopyCommand::copyFile(const std::string& originalName, const std::string& newName) {
-    AbstractFile* originalFile = file_system->openFile(originalName);
-
-    if (originalFile == nullptr)
-        return nullptr;
-
-    AbstractFile* copy = originalFile->copy(newName);
-
-    if (copy == nullptr) {
-        file_system->closeFile(originalFile);
-        return nullptr;
-    }
-
-    int result = file_system->addFile(newName, copy);
-
-    if (result != OK) {
-        delete copy; // Delete the copy if adding to the file system fails
-        return nullptr;
-    }
-
-    return copy;
-}
- */

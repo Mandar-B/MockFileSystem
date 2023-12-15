@@ -53,7 +53,6 @@ int DisplayCommand::execute(string args) {
 
         AbstractFileVisitor* fv = new BasicDisplayVisitor();
         f->accept(fv);
-        // You may want to implement a visitor pattern or other methods to display formatted contents
     }
 
     file_system->closeFile(f);

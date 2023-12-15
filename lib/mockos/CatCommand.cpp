@@ -49,7 +49,7 @@ int CatCommand::execute(string args) {
         // Create the appropriate file type based on the extension
 
         if (extension == "img"){
-            return 1;
+            return NAPIM;
         }
         const vector<char> contents = f->read();
         copy(contents.begin(), contents.end(), ostream_iterator<char>(cout, ""));
