@@ -20,6 +20,8 @@ enum codes {
     NDATA,  // no provided data to write
     UPIXL,  // unsupported pixel type
     DEP  ,  // deprecated
+    NWRIT,  // write permission failure
+    NEXEC,  // execute permission failure
 
 };
 

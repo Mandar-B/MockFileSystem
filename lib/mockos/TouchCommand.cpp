@@ -7,6 +7,7 @@
 #include "../include/mockos/AbstractFileSystem.h"
 #include "../include/mockos/AbstractFileFactory.h"
 #include "../include/mockos/PasswordProxy.h"
+#include "../include/mockos/PermissionFile.h"
 
 using namespace std;
 
@@ -32,17 +33,39 @@ int TouchCommand::execute(string args) {
 
     AbstractFile* f = fileFactory->createFile(fname);
 
+    string perms = "";
+
     if (ss >> flag) {
         if (flag == "-p") {
             cout << "What is the password?" << endl;
             string pwd;
             cin >> pwd;
             f = new PasswordProxy(f, pwd);
-        } else return NFLAG;
+            ss >> perms;
+        } else {
+            perms = flag;
+        }
     }
 
-    if (f == nullptr)
+    PermissionFile* fw = new PermissionFile(f);
+
+    if (perms != "") {
+        fw->setRead(false);
+        fw->setWrite(false);
+        fw->setExecute(false);
+        for (char p : perms) {
+            if (p == 'r') {
+                fw->setRead(true);
+            } else if (p == 'w') {
+                fw->setWrite(true);
+            } else if (p == 'x') {
+                fw->setExecute(true);
+            }
+        }
+    }
+
+    if (f == nullptr || fw == nullptr)
         return NFILE;
 
-    return fileSystem->addFile(f->getName(), f);
+    return fileSystem->addFile(fname, fw);
 }

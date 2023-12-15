@@ -61,6 +61,6 @@ void PasswordProxy::accept(AbstractFileVisitor* fv)  {
 
 AbstractFile* PasswordProxy::copy(string n) const {
     AbstractFile* nf = file_ptr->copy(n);
-    PasswordProxy* cp = new PasswordProxy(nf, nf->getName());
+    PasswordProxy* cp = new PasswordProxy(nf, password);
     return cp;
 }

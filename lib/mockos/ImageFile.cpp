@@ -68,7 +68,7 @@ int ImageFile::coordToIndex(int x, int y) const {
 
 int ImageFile::append(const std::vector<char>& data) {
 
-    return 4;
+    return NARGS;
 }
 
 std::vector<char> ImageFile::read() const {

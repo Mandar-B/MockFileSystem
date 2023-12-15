@@ -265,14 +265,14 @@
 				{
 					"directoryIndex" : 3,
 					"id" : "lab5::@145eef247bfb46b6828c",
-					"jsonFile" : "target-lab5-Debug-26039dc2722e0497c158.json",
+					"jsonFile" : "target-lab5-Debug-1aaa051900c6f7b50757.json",
 					"name" : "lab5",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 2,
 					"id" : "mockos::@081dc5135a8af5f06159",
-					"jsonFile" : "target-mockos-Debug-72a97895a6ecbebd18c3.json",
+					"jsonFile" : "target-mockos-Debug-9fa4e1a80f7300945198.json",
 					"name" : "mockos",
 					"projectIndex" : 0
 				},
