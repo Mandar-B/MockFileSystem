@@ -1,3 +1,6 @@
+//
+// Created by Mandar Brahmbhatt on 12/15/23.
+//
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -12,19 +15,21 @@
 #include "../include/mockos/MetadataDisplayVisitor.h"
 #include "../include/mockos/BasicDisplayVisitor.h"
 #include "../include/mockos/PermissionFile.h"
+#include "../include/mockos/ChmodCommand.h"
+
 
 using namespace std;
 
-DisplayCommand::DisplayCommand(AbstractFileSystem* fs)
+ChmodCommand::ChmodCommand(AbstractFileSystem* fs)
         : file_system(fs) {
 
 }
 
-void DisplayCommand::displayInfo() {
+void ChmodCommand::displayInfo() {
     cout << "chmod <filename> [-|+][r][w][x]" << endl;
 }
 
-int DisplayCommand::execute(string args) {
+int ChmodCommand::execute(string args) {
     if (args == "") return NARGS;
 
     istringstream ss(args);
@@ -42,7 +47,7 @@ int DisplayCommand::execute(string args) {
 
     if (perms != "") {
         PermissionFile* pf = dynamic_cast<PermissionFile*>(f);
-        
+
         if (pf == nullptr)
             return PRMCS;
 
@@ -58,6 +63,7 @@ int DisplayCommand::execute(string args) {
                 pf->setExecute(true);
             }
         }
+        file_system->closeFile(pf);
     }
 
     return OK;

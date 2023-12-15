@@ -12,6 +12,9 @@
 #include "../include/mockos/RenameParsingStrategy.h";
 #include "../include/mockos/GenerateParsingStrategy.h";
 #include "../include/mockos/PermissionFile.h"
+#include "../include/mockos/ChmodCommand.h"
+
+
 
 int main() {
     CommandPrompt cmd;
@@ -27,6 +30,8 @@ int main() {
     RemoveCommand rm (fs);
     LSCommand ls (fs);
     TouchCommand touch (fs, ff);
+    ChmodCommand chmod (fs);
+
 
     MacroCommand* rn = new MacroCommand(fs);
     RenameParsingStrategy* rnps = new RenameParsingStrategy();
@@ -42,6 +47,7 @@ int main() {
     gen->addCommand(&touch);
     gen->addCommand(&cat);
     gen->addCommand(&ds);
+
      // collect resources
 
     cmd.addCommand("cp", &cp);
@@ -52,6 +58,8 @@ int main() {
     cmd.addCommand("touch", &touch);
     cmd.addCommand("rn", rn);
     cmd.addCommand("gen", gen);
+    cmd.addCommand("chmod", &chmod);
+
 
     int ret = cmd.run();
 
