@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <sstream>
 
 #include "../include/mockos/MacroCommand.h"
 #include "../include/mockos/Constants.h"
@@ -12,6 +13,7 @@ using namespace std;
 
 MacroCommand::MacroCommand(AbstractFileSystem* fs)
         : file_system(fs) {
+    strategy=nullptr;
 
 }
 
@@ -20,10 +22,12 @@ void MacroCommand::displayInfo() {
 }
 
 int MacroCommand::execute(std::string flags) {
+
+
     vector<string> params = strategy->parse(flags);
     for (int i = 0; i < params.size(); ++i) {
         int res = commands[i]->execute(params[i]);
-        if (res != 0)
+        if (res != OK)
             return res;
     }
     return OK;

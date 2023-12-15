@@ -15,7 +15,7 @@ void MetadataDisplayVisitor::visit_TextFile(TextFile* textFile) {
 
     std::cout << name;
     std::cout << " text ";
-    std::cout << textFile->getSize() << " bytes" << std::endl;
+    std::cout << textFile->getSize() <<  std::endl;
 
 
 }
@@ -25,7 +25,7 @@ void MetadataDisplayVisitor::visit_ImageFile(ImageFile* imageFile) {
 
     std::cout << imageFile->getName();
     std::cout << " image ";
-    std::cout <<  imageFile->getSize() << " bytes";
+    std::cout <<  imageFile->getSize();
 
     std::cout << std::endl;
 }

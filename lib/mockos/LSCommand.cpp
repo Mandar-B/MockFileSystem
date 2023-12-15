@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <sstream>
 
 #include "../include/mockos/LSCommand.h"
 #include "../include/mockos/Constants.h"
@@ -21,15 +22,15 @@ void LSCommand::displayInfo() {
 
 
 
-int LSCommand::execute(std::string flags) {
+int LSCommand::execute(std::string flag) {
     set<string> files = file_system->getFileNames();
-
-
-    if (flags == "-m") {
+    istringstream ss(flag);
+    ss>>flag;
+    if ( flag == "-m"){
         MetadataDisplayVisitor* mdv = new MetadataDisplayVisitor;
         for (std::string fileName : files) {
             AbstractFile* file = file_system->openFile(fileName);
-            //cout<<fileName;
+
             if (file==nullptr) {
                 return UFILE;
 

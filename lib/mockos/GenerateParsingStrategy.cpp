@@ -11,6 +11,8 @@
 using namespace std;
 
 vector<string> GenerateParsingStrategy::parse(string input) const {
-    vector<string> out = {"", "", ""};
+    istringstream ss(input);
+    ss>>input;
+    vector<string> out = {input, input, input};
     return out;
 };

@@ -21,35 +21,35 @@ int main() {
     cmd.setFileSystem(fs);
     cmd.setFileFactory(ff);
 
-    CatCommand* cat = new CatCommand(fs);
-    DisplayCommand* ds = new DisplayCommand(fs);
-    CopyCommand* cp = new CopyCommand(fs);
-    RemoveCommand* rm = new RemoveCommand(fs);
-    LSCommand* ls = new LSCommand(fs);
-    TouchCommand* touch = new TouchCommand(fs, ff);
+    CatCommand cat (fs);
+    DisplayCommand ds (fs);
+    CopyCommand cp (fs);
+    RemoveCommand rm (fs);
+    LSCommand ls (fs);
+    TouchCommand touch (fs, ff);
 
     MacroCommand* rn = new MacroCommand(fs);
     RenameParsingStrategy* rnps = new RenameParsingStrategy();
     rn->setParseStrategy(rnps);
-    rn->addCommand(cp);
-    rn->addCommand(rm);
-    delete rnps; // collect resources
+    rn->addCommand(&cp);
+    rn->addCommand(&rm);
+     // collect resources
 
     // Create file, edit it, and display it
     MacroCommand* gen = new MacroCommand(fs);
     GenerateParsingStrategy* genps = new GenerateParsingStrategy();
     gen->setParseStrategy(genps);
-    gen->addCommand(touch);
-    gen->addCommand(cat);
-    gen->addCommand(ds);
-    delete genps; // collect resources
+    gen->addCommand(&touch);
+    gen->addCommand(&cat);
+    gen->addCommand(&ds);
+     // collect resources
 
-    cmd.addCommand("cp", cp);
-    cmd.addCommand("ds", ds);
-    cmd.addCommand("cat", cat);
-    cmd.addCommand("rm", rm);
-    cmd.addCommand("ls", ls);
-    cmd.addCommand("touch", touch);
+    cmd.addCommand("cp", &cp);
+    cmd.addCommand("ds", &ds);
+    cmd.addCommand("cat", &cat);
+    cmd.addCommand("rm", &rm);
+    cmd.addCommand("ls", &ls);
+    cmd.addCommand("touch", &touch);
     cmd.addCommand("rn", rn);
     cmd.addCommand("gen", gen);
 
@@ -59,6 +59,7 @@ int main() {
     delete fs;
     delete ff;
     // Commands will be deleted when CommandPrompt is automatically destroyed
-
+    delete rnps;
+    delete genps;
     return ret;
 }

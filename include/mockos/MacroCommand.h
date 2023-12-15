@@ -9,7 +9,7 @@ private:
     std::vector<AbstractCommand*> commands;
     AbstractParsingStrategy* strategy;
     AbstractFileSystem* file_system;
-    AbstractFileFactory* file_factory;
+
 public:
     MacroCommand(AbstractFileSystem*);
     void displayInfo() override;
