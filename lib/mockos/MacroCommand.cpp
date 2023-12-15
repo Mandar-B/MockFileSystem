@@ -34,5 +34,5 @@ void MacroCommand::addCommand(AbstractCommand* cmd) {
 }
 void MacroCommand::setParseStrategy(AbstractParsingStrategy* stgy) {
     // Implementation here
-    strategy = strategy;
+    strategy = stgy;
 }
