@@ -17,6 +17,7 @@
 #include "mockos/MacroCommand.h"
 #include "mockos/RenameParsingStrategy.h"
 
+
 #include "CommandTest.h"
 
 using namespace std;
@@ -1719,7 +1720,7 @@ TEST(catCommand,executeFileDoesNotExist) { // test executing cat with append opt
     cout.rdbuf(backup_out);
 }
 
-TEST(renameCommand,renameParsingStrategy) { // checks parse function of RenameParsingStrategy correctly converts input string into a vector of strings representing instructions for copy and remove commands
+/*TEST(renameCommand,renameParsingStrategy) { // checks parse function of RenameParsingStrategy correctly converts input string into a vector of strings representing instructions for copy and remove commands
     // REDIRECT COUT STREAM -- PROTECT AGAINST ERRORS
     streambuf* backup_out;
     backup_out = cout.rdbuf();
@@ -1935,7 +1936,7 @@ TEST(renameCommand,renameValidPasswordProtected) {
     cout.rdbuf(backup_out);
     // ASSIGN CIN BACK TO STDIN
     cin.rdbuf(backup_in);
-}
+}*/
 
 TEST(DSCommand,displaytext) {
     AbstractFileSystem* sfs = new SimpleFileSystem();

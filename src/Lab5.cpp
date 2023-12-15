@@ -11,6 +11,7 @@
 #include "../include/mockos/DisplayCommand.h";
 #include "../include/mockos/RenameParsingStrategy.h";
 #include "../include/mockos/GenerateParsingStrategy.h";
+#include "../include/mockos/PermissionFile.h"
 
 int main() {
     CommandPrompt cmd;

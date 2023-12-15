@@ -37,5 +37,6 @@ target_link_libraries(teststudio20 mockos gtest_main)
 add_executable(teststudio21 Studio21.cpp CommandTest.cpp CommandTest.h)
 target_link_libraries(teststudio21 mockos gtest_main)
 
-add_executable(testlab5 Lab5.cpp CommandTest.cpp CommandTest.h)
+add_executable(testlab5 Lab5.cpp CommandTest.cpp CommandTest.h
+        ../lib/mockos/PermissionFile.cpp)
 target_link_libraries(testlab5 mockos gtest_main)

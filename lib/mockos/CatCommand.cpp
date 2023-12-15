@@ -37,6 +37,20 @@ int CatCommand::execute(string args) {
 
     string flag;
     if (ss >> flag && flag == "-a") {
+        string name =f->getName();
+
+        size_t dotPosition = name.find_last_of('.');
+        if (dotPosition == string::npos || dotPosition == 0 || dotPosition == name.length() - 1) {
+            return UFLFM;
+        }
+
+        string extension = name.substr(dotPosition + 1);
+
+        // Create the appropriate file type based on the extension
+
+        if (extension == "img"){
+            return 1;
+        }
         const vector<char> contents = f->read();
         copy(contents.begin(), contents.end(), ostream_iterator<char>(cout, ""));
         cout << endl;

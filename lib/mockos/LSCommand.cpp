@@ -29,7 +29,7 @@ int LSCommand::execute(std::string flags) {
         MetadataDisplayVisitor* mdv = new MetadataDisplayVisitor;
         for (std::string fileName : files) {
             AbstractFile* file = file_system->openFile(fileName);
-            cout<<fileName;
+            //cout<<fileName;
             if (file==nullptr) {
                 return UFILE;
 

@@ -20,7 +20,7 @@ void BasicDisplayVisitor::visit_ImageFile(ImageFile* imageFile) {
     for (int y = 0; y < imageSize; ++y) {
         for (int x = 0; x < imageSize; ++x) {
             char pixel = content[imageFile->coordToIndex(x, y)];
-            std::cout << pixel << ' ';
+            std::cout << pixel ;
         }
         std::cout << std::endl;
     }

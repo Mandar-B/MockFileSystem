@@ -50,7 +50,7 @@ int DisplayCommand::execute(string args) {
         cout << endl;
     } else {
         // Display formatted contents
-        cout << "Displaying formatted contents of file: " << fname << endl;
+
         AbstractFileVisitor* fv = new BasicDisplayVisitor();
         f->accept(fv);
         // You may want to implement a visitor pattern or other methods to display formatted contents
