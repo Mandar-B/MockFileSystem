@@ -2,6 +2,10 @@
 
 Group members: Mandar Brahmbhatt, Nate Hayman
 
+Notes / Disclaimers:
+- The `ChmodCommand` class employs a dynamic cast to deal with the fact that the file system presents `AbstractFile`s rather than the `PermissionFile` that all files in the file system implement
+
+
 Work was split evenly, with a handful of commands being developed asynchronously and the rest being developed together in person
 
 - Testing of `touch`:
