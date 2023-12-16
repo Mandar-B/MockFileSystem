@@ -2,20 +2,20 @@
 #include <iostream>
 
 int main() {
-
+    // Test 1: Create TextFile and write data
     TextFile textFile("ex.txt");
-
 
     std::vector<char> data = {'H', 'e', 'l', 'l', 'o'};
     int writeResult = textFile.write(data);
 
     if (writeResult == 0) {
-        std::cout << "Write successful!";
+        std::cout << "Write successful!" << std::endl;
     } else {
-        std::cerr << "Error writing to the file.";
-        return 1;
+        std::cerr << "Error writing to the file." << std::endl;
+       // return 1;
     }
 
+    // Test 2: Read from the file
     std::cout << "File content: ";
     textFile.read();
 
@@ -24,15 +24,19 @@ int main() {
     int appendResult = textFile.append(dataToAppend);
 
     if (appendResult == 0) {
-        std::cout << "Append success";
+        std::cout << "Append success" << std::endl;
     } else {
-        std::cerr << "error appending";
-        return 1;
+        std::cerr << "Error appending to the file." << std::endl;
+        //return 1;
     }
 
-
+    // Test 4: Read after append
     std::cout << "File content after append: ";
     textFile.read();
+
+    // Test 5: Get file size and name
+    std::cout << "File size: " << textFile.getSize() << " bytes" << std::endl;
+    std::cout << "File name: " << textFile.getName() << std::endl;
 
     return 0;
 }
