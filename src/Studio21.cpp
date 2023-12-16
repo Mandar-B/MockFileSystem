@@ -6,6 +6,7 @@
 #include "mockos/SimpleFileFactory.h"
 #include "mockos/CommandPrompt.h"
 #include "mockos/TouchCommand.h"
+using namespace std;
 
 void print_test(string name, int& num, int res) {
     cout << num++ << ": " << name << "\t" 

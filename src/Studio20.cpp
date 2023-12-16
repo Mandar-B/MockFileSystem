@@ -10,8 +10,8 @@
 using namespace std;
 
 void print_test(string name, int& num, int res) {
-    cout << num++ << ": " << name << "\t" 
-        << (res ? "ERROR; code " : "SUCCESS") << (res ? to_string(res) : "") << endl;
+    cout << num++ << ": " << name << "\t"
+         << (res ? "ERROR; code " : "SUCCESS") << (res ? to_string(res) : "") << endl;
 }
 
 int main() {
