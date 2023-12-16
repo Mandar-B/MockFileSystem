@@ -65,8 +65,8 @@ int main() {
 
     print_test("Test rewriting file [incorrect password]", test_num, test_res);
 
-    AbstractFileVisitor* fv = new BasicDisplayVisitor();
-    proxy->accept(fv);
+    AbstractFileVisitor* fx = new BasicDisplayVisitor();
+    proxy->accept(fx);
 
     print_test("Test accepting basic display visitor [incorrect password] CONFIRM MANUALLY", test_num, OK);
 
