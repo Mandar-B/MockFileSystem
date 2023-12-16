@@ -41,9 +41,13 @@ int main() {
     fs->closeFile(f2);
     fs->closeFile(f3);
 
-    AbstractFile* f1 = fs->openFile("example.txt");
-    AbstractFile* f2 = fs->openFile("image.img");
-    AbstractFile* f3 = fs->openFile("aLongerName.txt");
+    AbstractFile* f1p = fs->openFile("example.txt");
+    AbstractFile* f2p = fs->openFile("image.img");
+    AbstractFile* f3p = fs->openFile("aLongerName.txt");
+
+    fs->closeFile(f1p);
+    fs->closeFile(f2p);
+    fs->closeFile(f3p);
 
     cout << "No unexpected behaviour after closing and opening all files" << endl;
 
