@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "mockos/Constants.h"
 #include "mockos/ImageFile.h"
 #include "mockos/TextFile.h"
 #include "mockos/BasicDisplayVisitor.h"
@@ -63,5 +64,5 @@ int main() {
 
     img.accept(&metadataDisplayVisitor);
 
-    return 0;
+    return OK;
 }

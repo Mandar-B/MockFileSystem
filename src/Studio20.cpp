@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include "mockos/Constants.h"
 #include "mockos/ImageFile.h"
 #include "mockos/TextFile.h"
 #include "mockos/PasswordProxy.h"
@@ -56,18 +57,18 @@ int main() {
     AbstractFileVisitor* fv = new BasicDisplayVisitor();
     proxy->accept(fv);
 
-    print_test("Test accepting basic display visitor [correct password] CONFIRM MANUALLY", test_num, 0);
+    print_test("Test accepting basic display visitor [correct password] CONFIRM MANUALLY", test_num, OK);
 
     cout << "Provide a correct password to the following prompt:" << endl;
 
-    test_res = proxy->write(contents) != 0;
+    test_res = proxy->write(contents) != OK;
 
     print_test("Test rewriting file [incorrect password]", test_num, test_res);
 
     AbstractFileVisitor* fv = new BasicDisplayVisitor();
     proxy->accept(fv);
 
-    print_test("Test accepting basic display visitor [incorrect password] CONFIRM MANUALLY", test_num, 0);
+    print_test("Test accepting basic display visitor [incorrect password] CONFIRM MANUALLY", test_num, OK);
 
-    return 0;
+    return OK;
 }
