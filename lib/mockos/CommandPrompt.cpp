@@ -18,10 +18,8 @@ CommandPrompt::CommandPrompt() {
     file_factory = nullptr;
 }
 CommandPrompt::~CommandPrompt() {
-    // Clean up the command objects in the map
-    for (const auto& pair : cobjs) {
-       
-    }
+
+
 }
 
 void CommandPrompt::setFileSystem(AbstractFileSystem* fs) {
