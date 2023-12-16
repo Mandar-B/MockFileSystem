@@ -1,45 +1,54 @@
-#include <iostream>
-#include "mockos/ImageFile.h"
 #include "mockos/TextFile.h"
-
-
-#include "mockos/SimpleFileSystem.h"
 #include <iostream>
 
 int main() {
-    // Test 1: Create an ImageFile instance
-    ImageFile imageFile("test_image.txt");
+    // Test 1: Create TextFile and write data
+    TextFile textFile("ex.txt");
 
-    // Test 2: Write to the file
-    std::vector<char> imageData = {'X', ' ', 'X', ' ', 'X', ' ', 'X', ' ', 'X', '3'};
-    int writeResult = imageFile.write(imageData);
+    std::vector<char> data = {'H', 'e', 'l', 'l', 'o'};
+    int writeResult = textFile.write(data);
 
     if (writeResult == 0) {
         std::cout << "Write successful!" << std::endl;
     } else {
-        std::cerr << "Error writing to the file. Error code: " << writeResult << std::endl;
+        std::cerr << "Error writing to the file." << std::endl;
         return 1;
     }
 
-    // Test 3: Display the content
-    std::cout << "Image content:" << std::endl;
-    imageFile.read();
+    // Display file content after Test 1
+    std::cout << "File content after Test 1: ";
+    textFile.read();
     std::cout << std::endl;
 
-    // Test 4: Invalid write with incorrect size
-    std::vector<char> invalidData = {'X', ' ', 'X', ' ', '2'}; // Missing size
-    int invalidWriteResult = imageFile.write(invalidData);
+    // Test 2: Read from the file
+    std::cout << "File content: ";
+    textFile.read();
+    std::cout << std::endl;
 
-    if (invalidWriteResult != 0) {
-        std::cout << "Invalid write attempt caught. Error code: " << invalidWriteResult << std::endl;
+    // Test 3: Append to the file
+    std::vector<char> dataToAppend = {' ', 'A', 'p', 'p', 'e', 'n', 'd'};
+    int appendResult = textFile.append(dataToAppend);
+
+    if (appendResult == 0) {
+        std::cout << "Append success" << std::endl;
+    } else {
+        std::cerr << "Error appending to the file." << std::endl;
+        return 1;
     }
 
-    // Test 5: Display the content after invalid write
-    std::cout << "Image content after invalid write:" << std::endl;
-    imageFile.read();
+    // Display file content after Test 3
+    std::cout << "File content after Test 3: ";
+    textFile.read();
     std::cout << std::endl;
 
-    // Add more tests as needed
+    // Test 4: Read after append
+    std::cout << "File content after append: ";
+    textFile.read();
+    std::cout << std::endl;
+
+    // Test 5: Get file size and name
+    std::cout << "File size: " << textFile.getSize() << " bytes" << std::endl;
+    std::cout << "File name: " << textFile.getName() << std::endl;
 
     return 0;
 }
