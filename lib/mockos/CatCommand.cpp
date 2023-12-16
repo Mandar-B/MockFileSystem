@@ -17,7 +17,7 @@ using namespace std;
 CatCommand::CatCommand(AbstractFileSystem* fs) : file_system(fs) {}
 
 void CatCommand::displayInfo() {
-    cout << "cat <filename> [-a]" << endl;
+    cout << "cat adds inputted content to a file, or appends it in the case of the '-a' flag. command format: cat <filename> [-a]" << endl;
 }
 
 int CatCommand::execute(string args) {

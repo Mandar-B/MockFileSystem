@@ -15,7 +15,7 @@ TouchCommand::TouchCommand(AbstractFileSystem* fs, AbstractFileFactory* ff)
         : fileSystem(fs), fileFactory(ff) {}
 
 void TouchCommand::displayInfo() {
-    cout << "touch creates a file, touch can be invoked with the command: touch <filename>" << endl;
+    cout << "touch creates a file. use '-p' to create a password protected file and add any or all of 'r', 'w', or 'x' to the end of the command call to specify wheteher the file can be read, written to, or executed, respectfully (note that by default a file will have all of the permissions enabled). command format: touch <filename> [-p] [r][w][x]" << endl;
 }
 
 int TouchCommand::execute(string args) {

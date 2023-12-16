@@ -17,7 +17,7 @@ LSCommand::LSCommand(AbstractFileSystem* lfs)
 }
 
 void LSCommand::displayInfo() {
-    cout << "ls displays all files in the current directory. Add the `-m` flag to display the metadata of each file" << endl;
+    cout << "ls displays all files in the current directory. add the `-m` flag to display the metadata of each file. command format: ls [-m]" << endl;
 }
 
 
