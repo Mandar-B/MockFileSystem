@@ -20,7 +20,7 @@ DisplayCommand::DisplayCommand(AbstractFileSystem* fs)
 }
 
 void DisplayCommand::displayInfo() {
-    cout << "ds <filename> [-d]" << endl;
+    cout << "ds displays the specified file according to its file format. command format: ds <filename> [-d]" << endl;
 }
 
 int DisplayCommand::execute(string args) {

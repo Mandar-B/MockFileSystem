@@ -7,8 +7,6 @@
 #include "mockos/CommandPrompt.h"
 #include "mockos/TouchCommand.h"
 
-using namespace std;
-
 void print_test(string name, int& num, int res) {
     cout << num++ << ": " << name << "\t" 
         << (res ? "ERROR; code " : "SUCCESS") << (res ? to_string(res) : "") << endl;
@@ -43,9 +41,13 @@ int main() {
     fs->closeFile(f2);
     fs->closeFile(f3);
 
-    AbstractFile* f4 = fs->openFile("example.txt");
-    AbstractFile* f5 = fs->openFile("image.img");
-    AbstractFile* f6 = fs->openFile("aLongerName.txt");
+    AbstractFile* f1p = fs->openFile("example.txt");
+    AbstractFile* f2p = fs->openFile("image.img");
+    AbstractFile* f3p = fs->openFile("aLongerName.txt");
+
+    fs->closeFile(f1p);
+    fs->closeFile(f2p);
+    fs->closeFile(f3p);
 
     cout << "No unexpected behaviour after closing and opening all files" << endl;
 

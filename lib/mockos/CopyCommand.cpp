@@ -17,7 +17,7 @@ CopyCommand::CopyCommand(AbstractFileSystem* fs)
 }
 
 void CopyCommand::displayInfo() {
-    cout << "ls displays all files in the current directory. Add the `-m` flag to display the metadata of each file" << endl;
+    cout << "cp copies the contents of one file to a new file with the specified title. destination file name should not include the file extension. command format: cp <original_file> <destination_name>" << endl;
 }
 
 int CopyCommand::execute(std::string args) {

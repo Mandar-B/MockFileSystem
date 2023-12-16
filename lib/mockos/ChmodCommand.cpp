@@ -26,7 +26,7 @@ ChmodCommand::ChmodCommand(AbstractFileSystem* fs)
 }
 
 void ChmodCommand::displayInfo() {
-    cout << "chmod <filename> [-|+][r][w][x]" << endl;
+    cout << "chmod updates the permissions of a specified file. use '+' or '-' to denote whether a permission is getting removed, and any or all of 'r', 'w', or 'x' to specify which permissions are being added or removed. note that any command implmentation involving a file visitor requires the execution ('x') permission. command format: chmod <filename> -|+[r][w][x]" << endl;
 }
 
 int ChmodCommand::execute(string args) {

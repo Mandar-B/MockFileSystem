@@ -17,13 +17,14 @@
 
 
 int main() {
+    // Initialize components
     CommandPrompt cmd;
-
     AbstractFileSystem* fs = new SimpleFileSystem();
     AbstractFileFactory* ff = new SimpleFileFactory();
     cmd.setFileSystem(fs);
     cmd.setFileFactory(ff);
 
+    // Initialize basic commands
     CatCommand cat (fs);
     DisplayCommand ds (fs);
     CopyCommand cp (fs);
@@ -32,15 +33,15 @@ int main() {
     TouchCommand touch (fs, ff);
     ChmodCommand chmod (fs);
 
-
+    // Initialize rename command
     MacroCommand* rn = new MacroCommand(fs);
     RenameParsingStrategy* rnps = new RenameParsingStrategy();
     rn->setParseStrategy(rnps);
     rn->addCommand(&cp);
     rn->addCommand(&rm);
-     // collect resources
 
-    // Create file, edit it, and display it
+    // Initialize generate command (creates new file, prompts user to input contents, 
+    // and displays the file)
     MacroCommand* gen = new MacroCommand(fs);
     GenerateParsingStrategy* genps = new GenerateParsingStrategy();
     gen->setParseStrategy(genps);
@@ -48,8 +49,7 @@ int main() {
     gen->addCommand(&cat);
     gen->addCommand(&ds);
 
-     // collect resources
-
+    // Map keywords to command pointers
     cmd.addCommand("cp", &cp);
     cmd.addCommand("ds", &ds);
     cmd.addCommand("cat", &cat);
