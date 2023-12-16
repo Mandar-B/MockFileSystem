@@ -20,7 +20,7 @@ CommandPrompt::CommandPrompt() {
 CommandPrompt::~CommandPrompt() {
     // Clean up the command objects in the map
     for (const auto& pair : cobjs) {
-        delete pair.second;
+       
     }
 }
 
